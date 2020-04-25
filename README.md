@@ -2,7 +2,7 @@
 
 ### Futtatáshoz kellék:
 * python 3.6+
-* numpy
+* numpy (https://solarianprogrammer.com/2017/02/25/install-numpy-scipy-matplotlib-python-3-windows/)
 
 ### Működés:
 * Parancssorban adhatók paraméterek:
