@@ -3,6 +3,7 @@
 ### Futtatáshoz kellék:
 * python 3.6+
 * numpy (https://solarianprogrammer.com/2017/02/25/install-numpy-scipy-matplotlib-python-3-windows/)
+* tabulate (`pip install tabulate` - pip verzióra figyelve, lehet pip3 fog kelleni!)
 
 ### Működés geom_alga.py:
 * Parancssorban adható paraméterek:
