@@ -7,8 +7,9 @@
 ### Működés:
 * Parancssorban adhatók paraméterek:
   * Első paraméter:
-    * `f`: forgásirány számítás (az értéket adja vissza), 3 pontot kér
-    * `m`: metsző szakaszpárok: 4 forgásirány értékét adja vissza (ABC, ABD, CDA, CDB) , 4 pontot kér
+    * `f`: Forgásirány számítás (az értéket adja vissza), 3 pontot kér
+    * `m`: Metsző szakaszpárok: 4 forgásirány értékét adja vissza (ABC, ABD, CDA, CDB) , 4 pontot kér
+    * `s`: Söprés: Metsző szakaszpárok keresése, 8 vagy 10 pontot kér 
     * `p`: Polárszög szerinti rendezés, 8 pontot kér
     * `g`: Graham pásztázás, 8 pontot kér
     * `j`: Jarvis menetelés, 8 pontot kér
