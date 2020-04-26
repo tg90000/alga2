@@ -48,8 +48,6 @@ def get_point(index_of_point, queue, points):
 def sopres(points):
 	ordered = sopres_rendezes(points)
 	queue = []
-	
-	# adott pontban C AB felett van -> balra fordul ABC
 	steps=0
 	for i in ordered:
 		steps+=1
@@ -63,7 +61,7 @@ def sopres(points):
 				C = points[queue[index+1][0]]
 				D = points[queue[index+1][1]]
 				metszo = metszo_bool(A, B, C, D)
-				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(A, B, C, D) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(A, B, C, D)
+				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(tuple(A), tuple(B), tuple(C), tuple(D)) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(tuple(A), tuple(B), tuple(C), tuple(D))
 				print(szoveg)
 			else:
 				print('\t Nem kellett vizsgalni.')
@@ -76,7 +74,7 @@ def sopres(points):
 				C = points[queue[index-1][0]]
 				D = points[queue[index-1][1]]
 				metszo = metszo_bool(A, B, C, D)
-				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(A, B, C, D) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(A, B, C, D)
+				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(tuple(A), tuple(B), tuple(C), tuple(D)) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(tuple(A), tuple(B), tuple(C), tuple(D))
 				print (szoveg)
 					
 			else:
@@ -85,8 +83,9 @@ def sopres(points):
 				C = points[queue[index+1][0]]
 				D = points[queue[index+1][1]]
 				metszo = metszo_bool(A, B, C, D)
-				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(A, B, C, D) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(A, B, C, D)
+				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(tuple(A), tuple(B), tuple(C), tuple(D)) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(tuple(A), tuple(B), tuple(C), tuple(D))
 			else: 
+		
 				print('\t Utolso pont.')
 	print ('Algoritmus vege.')
 
@@ -161,46 +160,23 @@ if __name__ == '__main__':
 		print('Alga2 2. geom alga ZH solver.\nElso parameternek add meg, melyik feladatot szeretned megoldani,\nutana pedig sorban a pontok koordinatait rendre A1 A2 B1 B2 stb\n')
 		print('Elso parameter:\n\t f: forgasirany\n\t m: metszo szakasz\n\t p: polar koordinatak szerinti rendezes\n\t j: Jarvis meneteles\n\t g: Graham-fele pasztazas\n\t s: sopres')
 		exit(0)
-	if len(sys.argv) != 8 and len(sys.argv) != 10 and len(sys.argv) != 18 and len(sys.argv) != 22:
-		print ('Megfelelo szamu koordinatat adj meg!\n\t Peldaul:\n\t ./geom_alga.py f 1 2 3 4 5 6\n\t Futtatas: forgasirany szamitas: A=(1,2) B=(3,4) C=(5,6) eseten.\n\t Csak 3, 4, 8 vagy 10 pont lehetseges.')
-		exit(1)
 	args = [float(x) for x in sys.argv[2:]]
-	
-	arglen = len(args)
-	if arglen>0:
-		A = np.array([args[0], args[1]])
-		B = np.array([args[2], args[3]])
-		C = np.array([args[4], args[5]])
-	if arglen>6:
-		D = np.array([args[6], args[7]])
-	if arglen>8:
-		E = np.array([args[8], args[9]])
-		F = np.array([args[10], args[11]])
-		G = np.array([args[12], args[13]])
-		H = np.array([args[14], args[15]])
-	if arglen>16:
-		I = np.array([args[16], args[17]])
-		J = np.array([args[18], args[19]])
+
+	points = [np.array([args[i], args[i+1]]) for i in range(0, len(args), 2)]	
 
 	if sys.argv[1]=='f':
-		print ('{:.2f}'.format(forgasirany(A, B, C)))
+		print ('{:.2f}'.format(forgasirany(points[:2])))
 	elif sys.argv[1]=='m':
-		for x in metszoszakasz(A, B, C, D):
+		for x in metszoszakasz(points[:3]):
 			print ('{:.2f}'.format(x))
-	elif sys.argv[1]=='g':
-		points = [A, B, C, D, E, F, G, H]	
+	elif sys.argv[1]=='g':	
 		CH_Graham(points)	
 	elif sys.argv[1]=='j':
-		points = [A, B, C, D, E, F, G, H]
 		CH_Jarvis(points)
 	elif sys.argv[1]=='s':
-		if arglen == 20:
-			points = [A, B, C, D, E, F, G, H, I, J]
-		else:
-			points = [A, B, C, D, E, F, G, H]
 		sopres(points)
 	elif sys.argv[1]=='p':
-		stack_visible = [tuple(x) for x in order_by_polar_coords([A, B, C, D, E, F, G, H])]
+		stack_visible = [tuple(x) for x in order_by_polar_coords(points)]
 		print (stack_visible)
 	else:
 		print('Elso parameter:\n\t f: forgasirany\n\t m: metszo szakasz\n\t p: polar koordinatak szerinti rendezes\n\t j: Jarvis meneteles\n\t g: Graham-fele pasztazas\n\t s: sopres')
