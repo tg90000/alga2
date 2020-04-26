@@ -49,4 +49,4 @@
   * Első paraméter egy string
   * Második paraméter a substring amit illesztünk
 * Példa:
-  * `>./mod_exp.py abcbaacacabbac acabbac`
+  * `>./dfa.py abcbaacacabbac acabbac`
