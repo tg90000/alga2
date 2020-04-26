@@ -108,34 +108,34 @@ def get_polar_coords(point, ref):
 def order_by_polar_coords(points):
 	# using the first point as reference
 	ref = points[0]
-	tuple_dict = { tuple(p) : get_polar_coords(p, ref) for p in points }
+	tuple_dict = { x : get_polar_coords(points[x], ref) for x in range(len(points)) }
 	tuple_dict = {k: v for k, v in sorted(tuple_dict.items(), key=lambda item: tuple(item[1]))}	
 	points = list(tuple_dict.keys())
-	return np.asarray(points)
+	return points
 
 def CH_Graham(points):
-	points = order_by_polar_coords(points)
-	stack = [points[0], points[1], points[2]]
-	stack_of_indicies = [0, 1, 2]
-	point = points[4]
+	indicies = order_by_polar_coords(points)
+	stack = [points[indicies[0]], points[indicies[1]], points[indicies[2]]]
+	stack_of_indicies = [indicies[0], indicies[1], indicies[2]]
+	point = points[indicies[4]]
 	i = 3
 	steps = 0
 	while True:
 		steps+=1
 		i = i % len(points)
-		irany = forgasirany(stack[-2], stack[-1], points[i])
+		irany = forgasirany(stack[-2], stack[-1], points[indicies[i]])
 		if irany <= 0:
 			stack.pop()
 			stack_of_indicies.pop()
 		else:
-			if i in stack_of_indicies:
+			if indicies[i] in stack_of_indicies:
 				stack_visible = [tuple(x) for x in stack]
 				stack_letters = letters(stack_of_indicies)
 				print ('{}. lepes:\n\t Forgasirany: {:.2f}\n\t Stack tartalma: {}\n\t Stack tartalma: {}'.format(steps, irany, stack_visible, stack_letters))
 				print ('Algoritmus vege.')
 				break
-			stack.append(points[i])
-			stack_of_indicies.append(i)
+			stack.append(points[indicies[i]])
+			stack_of_indicies.append(indicies[i])
 			i+=1
 		stack_visible = [tuple(x) for x in stack]
 		stack_letters = letters(stack_of_indicies)
@@ -192,7 +192,10 @@ if __name__ == '__main__':
 	elif sys.argv[1]=='s':
 		sopres(points)
 	elif sys.argv[1]=='p':
-		stack_visible = [tuple(x) for x in order_by_polar_coords(points)]
+		stack_visible = [tuple(points[x]) for x in order_by_polar_coords(points)]
+		stack_indicies = [x for x in order_by_polar_coords(points)]
+		stack_letters = letters(stack_indicies)
 		print (stack_visible)
+		print (stack_letters)
 	else:
 		print('Elso parameter:\n\t f: forgasirany\n\t m: metszo szakasz\n\t p: polar koordinatak szerinti rendezes\n\t j: Jarvis meneteles\n\t g: Graham-fele pasztazas\n\t s: sopres')
