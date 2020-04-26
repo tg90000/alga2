@@ -180,9 +180,10 @@ if __name__ == '__main__':
 
 	points = [np.array([args[i], args[i+1]]) for i in range(0, len(args), 2)]	
 	if sys.argv[1]=='f':
-		print ('{:.2f}'.format(forgasirany(points[:2])))
+		irany = forgasirany(points[0], points[1], points[2])
+		print ('{:.2f}'.format(irany))
 	elif sys.argv[1]=='m':
-		for x in metszoszakasz(points[:3]):
+		for x in metszoszakasz(points[0], points[1], points[2], points[3]):
 			print ('{:.2f}'.format(x))
 	elif sys.argv[1]=='g':	
 		CH_Graham(points)	

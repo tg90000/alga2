@@ -1,11 +1,11 @@
-# Alga 2 második ZH solver algoritmusok a geometriai részhez
+# Alga 2 második ZH solver algoritmusok
 
 ### Futtatáshoz kellék:
 * python 3.6+
 * numpy (https://solarianprogrammer.com/2017/02/25/install-numpy-scipy-matplotlib-python-3-windows/)
 
-### Működés:
-* Parancssorban adhatók paraméterek:
+### Működés geom_alga.py:
+* Parancssorban adható paraméterek:
   * Első paraméter:
     * `f`: Forgásirány számítás (az értéket adja vissza), 3 pontot kér
     * `m`: Metsző szakaszpárok: 4 forgásirány értékét adja vissza (ABC, ABD, CDA, CDB) , 4 pontot kér
@@ -20,3 +20,11 @@
 * Példa:
   * `>./geom_alga.py f 2 4 -2 0 9 2`
   * `36.00`
+
+### Működés rabin.py:
+* Parancssori paraméterek:
+  * Első paraméter egy szöveg (esetünkben számjegyekből álló string)
+  * Második paraméter a substring amit vizsgálunk (egy másik számjegyekből álló string)
+  * Harmadik paraméter a modulus, amivel a hash-t készítjük
+* Példa:
+  * `>./rabin.py 3613203214 321 11`
