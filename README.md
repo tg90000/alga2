@@ -28,3 +28,12 @@
   * Harmadik paraméter a modulus, amivel a hash-t készítjük
 * Példa:
   * `>./rabin.py 3613203214 321 11`
+  
+### Működés kmp.py:
+* Parancssori paraméterek:
+  * Első paraméter egy string
+  * Második paraméter a substring amit vizsgálunk
+* Példa:
+  * `>./kmp.py aaabaababa aababa`
+  
+  
