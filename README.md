@@ -43,3 +43,10 @@
   * Harmadik paraméter is szám: a modulus
 * Példa:
   * `>./mod_exp.py 7 13 17`
+  
+### Működés dfa.py:
+* Parancssori paraméterek:
+  * Első paraméter egy string
+  * Második paraméter a substring amit illesztünk
+* Példa:
+  * `>./mod_exp.py abcbaacacabbac acabbac`
