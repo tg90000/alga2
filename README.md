@@ -5,7 +5,7 @@
 * numpy (https://solarianprogrammer.com/2017/02/25/install-numpy-scipy-matplotlib-python-3-windows/)
 
 ### Működés geom_alga.py:
-* Parancssorban adhatók paraméterek:
+* Parancssorban adható paraméterek:
   * Első paraméter:
     * `f`: Forgásirány számítás (az értéket adja vissza), 3 pontot kér
     * `m`: Metsző szakaszpárok: 4 forgásirány értékét adja vissza (ABC, ABD, CDA, CDB) , 4 pontot kér
@@ -26,3 +26,5 @@
   * Első paraméter egy szöveg (esetünkben számjegyekből álló string)
   * Második paraméter a substring amit vizsgálunk (egy másik számjegyekből álló string)
   * Harmadik paraméter a modulus, amivel a hash-t készítjük
+* Példa:
+  * `>./rabin.py 3613203214 321 11`
