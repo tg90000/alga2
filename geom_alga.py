@@ -194,7 +194,10 @@ if __name__ == '__main__':
 		points = [A, B, C, D, E, F, G, H]
 		CH_Jarvis(points)
 	elif sys.argv[1]=='s':
-		points = [A, B, C, D, E, F, G, H, I, J]
+		if arglen == 20:
+			points = [A, B, C, D, E, F, G, H, I, J]
+		else:
+			points = [A, B, C, D, E, F, G, H]
 		sopres(points)
 	elif sys.argv[1]=='p':
 		stack_visible = [tuple(x) for x in order_by_polar_coords([A, B, C, D, E, F, G, H])]
