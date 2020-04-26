@@ -9,12 +9,11 @@
   * Első paraméter:
     * `f`: Forgásirány számítás (az értéket adja vissza), 3 pontot kér
     * `m`: Metsző szakaszpárok: 4 forgásirány értékét adja vissza (ABC, ABD, CDA, CDB) , 4 pontot kér
-    * `s`: Söprés: Metsző szakaszpárok keresése, 8 vagy 10 pontot kér.
-      * 4 vagy 5 szakaszt kaphat
+    * `s`: Söprés: Metsző szakaszpárok keresése
       * Ha a szakaszok: AD EB FC GH akkor a pontokat sorban a szakaszok szerint kell beírni, azaz rendre A1 A2 D1 D2 E1 E2 stb
-    * `p`: Polárszög szerinti rendezés, 8 pontot kér
-    * `g`: Graham pásztázás, 8 pontot kér
-    * `j`: Jarvis menetelés, 8 pontot kér
+    * `p`: Polárszög szerinti rendezés
+    * `g`: Graham pásztázás
+    * `j`: Jarvis menetelés
   * Második paramétertől:
     * A pontok koordinátái space-el elválasztva
     * Pl.: A(1,2) B(3,4) C(6.3 -0.7) esetén `1 2 3 4 6.3 -0.7`
