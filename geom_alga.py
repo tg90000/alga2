@@ -14,9 +14,81 @@ def forgasirany(A, B, C):
 def metszoszakasz(A, B, C, D):
 	return [forgasirany(A, B, C), forgasirany(A, B, D), forgasirany(C, D, A), forgasirany(C, D, B)]
 
+def sopres_prior(index, points):
+	point = points[index]
+	return point[0], index % 2, point[1]
+
+def sopres_rendezes(points):
+	tuple_dict = { i : sopres_prior(i, points) for i in range(len(points))}
+	point_indicies = [k for k, v in sorted(tuple_dict.items(), key=lambda item: tuple(item[1]))]
+	return point_indicies
+
+def metszo_bool(A, B, C, D):
+	t1, t2, t3, t4 = metszoszakasz(A, B, C, D)
+	if t1*t2 < 0 and t3*t4 < 0:
+		return True
+	return False
+
+def add_to_sorted_Q(index_of_point, queue, points):
+	index = 0
+	for l in queue:
+		if forgasirany(points[l[0]], points[l[1]], points[index_of_point]) > 0:
+			index += 1
+	queue.insert(index, [index_of_point, index_of_point+1])
+	return queue, index
+
+def get_point(index_of_point, queue, points):
+	index = 0
+	for x in queue:
+		if x[0]==index_of_point or x[1]==index_of_point:
+			break
+		index += 1
+	return index
+
 def sopres(points):
-	points = [p for p in sorted(points, key=lambda p: tuple(p))]
-	print (points)
+	ordered = sopres_rendezes(points)
+	queue = []
+	
+	# adott pontban C AB felett van -> balra fordul ABC
+	steps=0
+	for i in ordered:
+		steps+=1
+		print ('{}. lepes:'.format(steps))
+		if i%2!=0:
+			metszo = False
+			index = get_point(i, queue, points)
+			if index > 0 and index < len(queue)-1:
+				A = points[queue[index-1][0]]
+				B = points[queue[index-1][1]]
+				C = points[queue[index+1][0]]
+				D = points[queue[index+1][1]]
+				metszo = metszo_bool(A, B, C, D)
+				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(A, B, C, D) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(A, B, C, D)
+				print(szoveg)
+			else:
+				print('\t Nem kellett vizsgalni.')
+			queue.pop(index)		
+		else:
+			queue, index = add_to_sorted_Q(i, queue, points)
+			A = points[queue[index][0]]
+			B = points[queue[index][1]]
+			if (index > 0):
+				C = points[queue[index-1][0]]
+				D = points[queue[index-1][1]]
+				metszo = metszo_bool(A, B, C, D)
+				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(A, B, C, D) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(A, B, C, D)
+				print (szoveg)
+					
+			else:
+				print ('\t Elso pont.')
+			if (index < len(queue)-1):
+				C = points[queue[index+1][0]]
+				D = points[queue[index+1][1]]
+				metszo = metszo_bool(A, B, C, D)
+				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(A, B, C, D) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(A, B, C, D)
+			else: 
+				print('\t Utolso pont.')
+	print ('Algoritmus vege.')
 
 def get_polar_coords(point, ref):
 	point_from_ref = np.subtract(point, ref)
@@ -89,22 +161,26 @@ if __name__ == '__main__':
 		print('Alga2 2. geom alga ZH solver.\nElso parameternek add meg, melyik feladatot szeretned megoldani,\nutana pedig sorban a pontok koordinatait rendre A1 A2 B1 B2 stb\n')
 		print('Elso parameter:\n\t f: forgasirany\n\t m: metszo szakasz\n\t p: polar koordinatak szerinti rendezes\n\t j: Jarvis meneteles\n\t g: Graham-fele pasztazas\n\t s: sopres')
 		exit(0)
-	if len(sys.argv) != 8 and len(sys.argv) != 10 and len(sys.argv) != 18:
-		print ('Megfelelo szamu koordinatat adj meg!\n\t Peldaul:\n\t ./geom_alga.py f 1 2 3 4 5 6\n\t Futtatas: forgasirany szamitas: A=(1,2) B=(3,4) C=(5,6) eseten.\n\t Csak 3, 4 vagy 8 pont lehetseges.')
+	if len(sys.argv) != 8 and len(sys.argv) != 10 and len(sys.argv) != 18 and len(sys.argv) != 22:
+		print ('Megfelelo szamu koordinatat adj meg!\n\t Peldaul:\n\t ./geom_alga.py f 1 2 3 4 5 6\n\t Futtatas: forgasirany szamitas: A=(1,2) B=(3,4) C=(5,6) eseten.\n\t Csak 3, 4, 8 vagy 10 pont lehetseges.')
 		exit(1)
 	args = [float(x) for x in sys.argv[2:]]
-
-	if len(args)>0:
+	
+	arglen = len(args)
+	if arglen>0:
 		A = np.array([args[0], args[1]])
 		B = np.array([args[2], args[3]])
 		C = np.array([args[4], args[5]])
-	if len(args)>6:
+	if arglen>6:
 		D = np.array([args[6], args[7]])
-	if len(args)>8:
+	if arglen>8:
 		E = np.array([args[8], args[9]])
 		F = np.array([args[10], args[11]])
 		G = np.array([args[12], args[13]])
 		H = np.array([args[14], args[15]])
+	if arglen>16:
+		I = np.array([args[16], args[17]])
+		J = np.array([args[18], args[19]])
 
 	if sys.argv[1]=='f':
 		print ('{:.2f}'.format(forgasirany(A, B, C)))
@@ -118,7 +194,7 @@ if __name__ == '__main__':
 		points = [A, B, C, D, E, F, G, H]
 		CH_Jarvis(points)
 	elif sys.argv[1]=='s':
-		points = [A, B, C, D, E, F, G, H]
+		points = [A, B, C, D, E, F, G, H, I, J]
 		sopres(points)
 	elif sys.argv[1]=='p':
 		stack_visible = [tuple(x) for x in order_by_polar_coords([A, B, C, D, E, F, G, H])]
