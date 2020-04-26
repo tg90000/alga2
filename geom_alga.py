@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from string import ascii_uppercase
 import math
 import numpy as np
 import sys
@@ -61,7 +62,9 @@ def sopres(points):
 				C = points[queue[index+1][0]]
 				D = points[queue[index+1][1]]
 				metszo = metszo_bool(A, B, C, D)
-				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(tuple(A), tuple(B), tuple(C), tuple(D)) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(tuple(A), tuple(B), tuple(C), tuple(D))
+				indicies = [queue[index-1][0], queue[index-1][1], queue[index+1][0], queue[index+1][1]]
+				_letters = letters(indicies)
+				szoveg = '\t{}{} {}{} es {}{} {}{} metszik egymast!'.format(_letters[0], tuple(A), _letters[1], tuple(B), _letters[2], tuple(C), _letters[3], tuple(D)) if metszo else '\t {}{} és {}{} nem metszok.'.format(_letters[0], tuple(A), _letters[1], tuple(B), _letters[2], tuple(C), _letters[3], tuple(D))
 				print(szoveg)
 			else:
 				print('\t Nem kellett vizsgalni.')
@@ -74,7 +77,9 @@ def sopres(points):
 				C = points[queue[index-1][0]]
 				D = points[queue[index-1][1]]
 				metszo = metszo_bool(A, B, C, D)
-				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(tuple(A), tuple(B), tuple(C), tuple(D)) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(tuple(A), tuple(B), tuple(C), tuple(D))
+				indicies = [queue[index][0], queue[index][1], queue[index-1][0], queue[index-1][1]]
+				_letters = letters(indicies)
+				szoveg = '\t{}{} {}{} es {}{} {}{} metszik egymast!'.format(_letters[0], tuple(A), _letters[1], tuple(B), _letters[2], tuple(C), _letters[3], tuple(D)) if metszo else '\t {}{} és {}{} nem metszok.'.format(_letters[0], tuple(A), _letters[1], tuple(B), _letters[2], tuple(C), _letters[3], tuple(D))
 				print (szoveg)
 					
 			else:
@@ -83,7 +88,10 @@ def sopres(points):
 				C = points[queue[index+1][0]]
 				D = points[queue[index+1][1]]
 				metszo = metszo_bool(A, B, C, D)
-				szoveg = '\t({} {}) es ({} {}) metszik egymast!'.format(tuple(A), tuple(B), tuple(C), tuple(D)) if metszo else '\t ({} {}) és ({} {}) nem metszok.'.format(tuple(A), tuple(B), tuple(C), tuple(D))
+				indicies = [queue[index][0], queue[index][1], queue[index+1][0], queue[index+1][1]]
+				_letters = letters(indicies)
+				szoveg = '\t{}{} {}{} es {}{} {}{} metszik egymast!'.format(_letters[0], tuple(A), _letters[1], tuple(B), _letters[2], tuple(C), _letters[3], tuple(D)) if metszo else '\t {}{} és {}{} nem metszok.'.format(_letters[0], tuple(A), _letters[1], tuple(B), _letters[2], tuple(C), _letters[3], tuple(D))
+				print(szoveg)
 			else: 
 		
 				print('\t Utolso pont.')
@@ -122,14 +130,16 @@ def CH_Graham(points):
 		else:
 			if i in stack_of_indicies:
 				stack_visible = [tuple(x) for x in stack]
-				print ('{}. lepes:\n\t Forgasirany: {:.2f}\n\t Stack tartalma: {}\n\t'.format(steps, irany, stack_visible))
+				stack_letters = letters(stack_of_indicies)
+				print ('{}. lepes:\n\t Forgasirany: {:.2f}\n\t Stack tartalma: {}\n\t Stack tartalma: {}'.format(steps, irany, stack_visible, stack_letters))
 				print ('Algoritmus vege.')
 				break
 			stack.append(points[i])
 			stack_of_indicies.append(i)
 			i+=1
 		stack_visible = [tuple(x) for x in stack]
-		print ('{}. lepes:\n\t Forgasirany: {:.2f}\n\t Stack tartalma: {}\n\t'.format(steps, irany, stack_visible))
+		stack_letters = letters(stack_of_indicies)
+		print ('{}. lepes:\n\t Forgasirany: {:.2f}\n\t Stack tartalma: {}\n\t Stack tartalma: {}'.format(steps, irany, stack_visible, stack_letters))
 
 def CH_Jarvis(points):
 	stack = [points[0]]
@@ -146,14 +156,20 @@ def CH_Jarvis(points):
 				index_of_last = x
 		if index_of_last in stack_of_indicies:
 			stack_visible = [tuple(x) for x in stack]
-			print ('{}. lepes:\n\t Referencia pont valtasok szama: {}\n\t Stack tartalma: {}'.format(steps, change_counter, stack_visible))
+			stack_letters = letters(stack_of_indicies)
+			print ('{}. lepes:\n\t Referencia pont valtasok szama: {}\n\t Stack tartalma: {}\n\t Stack tartalma: {}'.format(steps, change_counter, stack_visible, stack_letters))
 			print ('Algoritmus vege.')
 			break
 		stack.append(points[index_of_last])
 		stack_of_indicies.append(index_of_last)
 		stack_visible = [tuple(x) for x in stack]
-		print ('{}. lepes:\n\t Referencia pont valtasok szama: {}\n\t Stack tartalma: {}'.format(steps, change_counter, stack_visible))
+		stack_letters = letters(stack_of_indicies)
+		print ('{}. lepes:\n\t Referencia pont valtasok szama: {}\n\t Stack tartalma: {}\n\t Stack tartalma: {}'.format(steps, change_counter, stack_visible, stack_letters))
 
+def letters(indicies):
+	dict_of_letters = {index: letter for index, letter in enumerate(ascii_uppercase, start=0) if index in indicies}
+	ret = list(map(lambda x: dict_of_letters[x], indicies))
+	return ret
 
 if __name__ == '__main__':
 	if sys.argv[1]=='help':
@@ -163,7 +179,6 @@ if __name__ == '__main__':
 	args = [float(x) for x in sys.argv[2:]]
 
 	points = [np.array([args[i], args[i+1]]) for i in range(0, len(args), 2)]	
-
 	if sys.argv[1]=='f':
 		print ('{:.2f}'.format(forgasirany(points[:2])))
 	elif sys.argv[1]=='m':
