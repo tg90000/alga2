@@ -36,4 +36,10 @@
 * Példa:
   * `>./kmp.py aaabaababa aababa`
   
-  
+### Működés mod_exp.py:
+* Parancssori paraméterek:
+  * Első paraméter egy szám: hatványalap
+  * Második paraméter is szám: hatvány kitevő
+  * Harmadik paraméter is szám: a modulus
+* Példa:
+  * `>./mod_exp.py 7 13 17`
