@@ -12,6 +12,8 @@
     * `m`: Metsző szakaszpárok: 4 forgásirány értékét adja vissza (ABC, ABD, CDA, CDB) , 4 pontot kér
     * `s`: Söprés: Metsző szakaszpárok keresése
       * Ha a szakaszok: AD EB FC GH akkor a pontokat sorban a szakaszok szerint kell beírni, azaz rendre A1 A2 D1 D2 E1 E2 stb
+      * A szakaszok kezdőpontjait a vége elé kell írni, azaz rendezni kell a végpontjait x, majd y szerint.
+      * Ehhez pl: A(-2, 4) -- B(-6, 5) esetén a programnak rendre a -6 5 -2 4 számokat kell beadni. - ilyenkor az outputnál is figyelni kell a betűk cseréjére!
     * `p`: Polárszög szerinti rendezés
     * `g`: Graham pásztázás
     * `j`: Jarvis menetelés
