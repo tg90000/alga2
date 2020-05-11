@@ -33,10 +33,10 @@
 * csúcs kieg1: egyensúlyi faktor: a fiai magasságának különbsége (tkp a kieg infóiké)
 * kieg infó: magasság: nagyobb (kieg infójú) fiú kieg + 1
 * csúcsok a fibonacci számok-1 módon növekszik a magassággal: 
-    * 1 2-1
-    * 2 3-1
-    * 3 5-1
-    * 4 8-1 stb
+    * 1 2-1=1
+    * 2 3-1=2
+    * 3 5-1=4
+    * 4 8-1=7 stb
     * m = m(h-2) + m(h-1) + 1 
 * h < 1.44 log2(N) korlát. Ez amúgy pont az 1,618 (aranymetszés, meg a fibo számok aránya) 10-esről 2-es logba írva…
 * Helyreállítás minden lépés után, forgatások:
@@ -63,11 +63,11 @@
 * (Elméleti cucc még ide a tail rekurzió, ami csak annyit takar, hogy a fv utolsó parancsa a rekurzív hívás)
 
 
-2-3-4 fa:
+### 2-3-4 fa:
 * általános keresőfa
 * minden csúcsának a rangja 1 vagy 2 vagy 3. 
 
-Piros-fekete fa:
+### Piros-fekete fa:
 * gyökér fekete
 * minden levél fekete
 * piros csúcsnak csak fekete gyereke lehet
@@ -82,7 +82,7 @@ Piros-fekete fa:
 =============================================================================
 
 
-Binomiális kupac:
+### Binomiális kupac:
 * kupac - prisor
 * ezekből fák építve
 * Fontos műveletek:
@@ -92,17 +92,17 @@ Binomiális kupac:
 * Kupac implementációja -> tömb
 * Bináris kupac: teljes bináris fa, amire teljesül a kupactulajdonság (azaz a leveleken kívül minden csúcsnak 2 fia van)
 
-Fapac:
+### Fapac:
 * kulcsok keresőfa tul. szerint (bal kisebb jobb nagyobb)
 * extra adattag
 
-Binomiális fa:
+### Binomiális fa:
 * 2^k csúcsa van
 * i-edik mélységben k alatt i csúcsa van (gyökér i=0)
 * Rend: i-edik gyerek 1-1 Bi részfa gyökere
 * n csúcsú fa minden csúcsának fokszáma legfeljebb log(n)
 
-Binomiális kupac:
+### Binomiális kupac:
 * ha minden fa rendelkezik a (min/max) kupactulajdonsággal
 * nincsenek azonos fokszámú fák
 * Tehát legfeljebb floor(logn) + 1 binom fából áll
@@ -111,12 +111,12 @@ Binomiális kupac:
 * Törlés: gyökér helyére írjuk, majd kupac helyreállít, és törlés
 * binom vs bináris kupac: https://github.com/begab/alga2/blob/master/eloadas/05/alga2_05.pdf
 
-Amortizált költségelemzés:
+### Amortizált költségelemzés:
 * ea: https://github.com/begab/alga2/blob/master/eloadas/06/alga2_06.pdf
 * gyak: https://github.com/begab/alga2/blob/master/gyakorlatok/gyak07/alga2_gyak07.pdf
 * k bites számlálón Növel művelet amortizáltan konstans
 
-Fibonacci kupac:
+### Fibonacci kupac:
 * egy csúcs megjelölt, ha vesztett gyereket azóta, hogy másik csúcs gyereke lett
 * minimumpointer
 * gyökérlista random sorrend
@@ -128,7 +128,7 @@ Fibonacci kupac:
     * Ha nem használjuk a műveleteket, logn
     * Ha igen, akkor log(fí)n (fí az 1,618) - ez rosszabb mint a log2 just sayin
 
-Önszerveződő fa:
+### Önszerveződő fa:
 * Keresőfa
 * minden művelet után az utoljára érintett csúcsot forgatásokkal a gyökérbe viszi
 * O(n) magas, amortizáltan csak Logn
@@ -136,14 +136,14 @@ Fibonacci kupac:
 
 =============================================================================
 
-Innentől csak elméleti anyag lesz, gyakanyagra solver!
+## Innentől csak elméleti anyag lesz, gyakanyagra solver!
 
-Geom
+### Geom
 Ea slideok: https://github.com/begab/alga2/blob/master/eloadas/07_08/alga2_07.pdf
 Kereséshez jobb a tex:
 https://github.com/begab/alga2/blob/master/eloadas/07_08/alga2_07.tex
 
-Fonya, dimat:
+### Fonya, dimat:
 https://github.com/begab/alga2/blob/master/eloadas/09/alga2_09.pdf
 Kereséshez tex:
 https://github.com/begab/alga2/blob/master/eloadas/09/alga2_09.tex
